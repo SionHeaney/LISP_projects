@@ -9,18 +9,20 @@ Initial iteration of this script tries to match a target color sequence
 by randomly applying three types of operations:
 
 **Swap**: Swaps two random positions
+from the list select two atoms, check they're not the same; and if so nudge second position, then swep.
+
+_what if second position is at either first or last in list?_ solution: nudge based on first position
 
 ```lisp
 (defun swap-random (lst)
-  "Swap two randomly selected positions in the list"
   (let* ((len (length lst))
          (pos1 (random len))
          (pos2 (random len))
          (result (copy-list lst)))
-    ;; Ensure we swap different positions
+   
     (when (= pos1 pos2)
       (setf pos2 (mod (1+ pos1) len)))
-    ;; Perform the swap
+    
     (rotatef (nth pos1 result) (nth pos2 result))
     result))
 ```
@@ -28,7 +30,6 @@ by randomly applying three types of operations:
 
 **Shuffle**: Randomly shuffles the entire list
 ```lisp
-(defun swap-random (lst)
 (defun shuffle-list (lst)
   "Randomly shuffle the entire list"
   (let ((result (copy-list lst)))
@@ -38,8 +39,23 @@ by randomly applying three types of operations:
     result))
 ```
 
-
 **Shift**: Shifts the list left or right
+```lisp
+(defun shift-left (lst)
+  "Shift list left: (c1 c2 c3 c4) -> (c2 c3 c4 c1)"
+  (append (rest lst) (list (first lst))))
+
+(defun shift-right (lst)
+  "Shift list right: (c1 c2 c3 c4) -> (c4 c1 c2 c3)"
+  (append (last lst) (butlast lst)))
+
+(defun apply-shift (lst)
+  "Randomly shift left or right"
+  (if (zerop (random 2))
+      (values (shift-left lst) 'shift-left)
+      (values (shift-right lst) 'shift-right)))
+```
+
 
 __Key components:__
 Target sequence: (green blue yellow red)
