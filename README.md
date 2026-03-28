@@ -29,16 +29,12 @@ by randomly applying three types of operations:
 **Shuffle**: Randomly shuffles the entire list
 ```lisp
 (defun swap-random (lst)
-  "Swap two randomly selected positions in the list"
-  (let* ((len (length lst))
-         (pos1 (random len))
-         (pos2 (random len))
-         (result (copy-list lst)))
-    ;; Ensure we swap different positions
-    (when (= pos1 pos2)
-      (setf pos2 (mod (1+ pos1) len)))
-    ;; Perform the swap
-    (rotatef (nth pos1 result) (nth pos2 result))
+(defun shuffle-list (lst)
+  "Randomly shuffle the entire list"
+  (let ((result (copy-list lst)))
+    (loop for i from (1- (length result)) downto 1 do
+          (let ((j (random (1+ i))))
+            (rotatef (nth i result) (nth j result))))
     result))
 ```
 
