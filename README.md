@@ -9,7 +9,27 @@ Initial iteration of this script tries to match a target color sequence
 by randomly applying three types of operations:
 
 **Swap**: Swaps two random positions
+
+```lisp
+(defun swap-random (lst)
+  "Swap two randomly selected positions in the list"
+  (let* ((len (length lst))
+         (pos1 (random len))
+         (pos2 (random len))
+         (result (copy-list lst)))
+    ;; Ensure we swap different positions
+    (when (= pos1 pos2)
+      (setf pos2 (mod (1+ pos1) len)))
+    ;; Perform the swap
+    (rotatef (nth pos1 result) (nth pos2 result))
+    result))
+```
+
+
 **Shuffle**: Randomly shuffles the entire list
+
+
+
 **Shift**: Shifts the list left or right
 
 __Key components:__
@@ -34,3 +54,5 @@ logId, matched, current_colours, method_applied
 
 Solution found in 5 iterations!
 PS C:\Users\Sion\Projects\lisp_learning>
+
+
