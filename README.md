@@ -2,11 +2,10 @@
 Rediscovering LISP 
 
 ## factorial.lisp
-Classic textbook example of recursion
+Classic textbook example of recursion. Boringgg but necessary
 
 ## puzzle_color_matching.lisp 
-Initial iteration of this script tries to match a target color sequence 
-by randomly applying three types of operations:
+Inspired by watching Crystal Maze with Richard Ayoyade💙 Initial iteration of this script tries to match a target color sequence by randomly applying three types of operations:
 
 **Swap**: Swaps two random positions
 from the list select two atoms, check they're not the same; and if so nudge second position, then swep.
