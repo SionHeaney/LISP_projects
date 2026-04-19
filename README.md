@@ -10,8 +10,6 @@ Inspired by watching Crystal Maze with Richard Ayoyade💙 Initial iteration of 
 **Swap**: Swaps two random positions
 from the list select two atoms, check they're not the same; and if so nudge second position, then swep.
 
-_what if second position is at either first or last in list?_ solution: nudge based on first position
-
 ```lisp
 (defun swap-random (lst)
   (let* ((len (length lst))
@@ -26,7 +24,7 @@ _what if second position is at either first or last in list?_ solution: nudge ba
     result))
 ```
 
-Loving the `random()` function SBCL has. Acorn LISP needed one to write Gauss or Poisson distribution from machine time stamp, or some such malarky. Demonstrated the 50/50 initial result with class at University Sussex CCPE. Simultaneous runnin script on dozen or so BBC Micros after resetting BIOS clocks
+Loving the `random()` function SBCL has ngl. Acorn LISP needed one to write Gauss or Poisson distribution from machine time stamp, or some such malarky. Demonstrated the 50/50 initial result with class at University Sussex CCPE. Simultaneous runnin script on dozen or so BBC Micros after resetting BIOS clocks
 
 List has to loop around but, hah, didn't really think about this function's need because it would effectively wipe any previously matched items in the list. Really, the shuffle is almost act of desperation; nothing's matching so why not reroll. However, even that's unnecesary as several swaps would accomplish the same thing.
 
@@ -62,7 +60,8 @@ Shift list to right: (c1 c2 c3 c4) -> (c4 c1 c2 c3)"
 __Key components:__
 Target sequence: (green blue yellow red)
 Starting colors: (red green blue yellow)
-Maximum iterations: 1000
+:: extend list length with more colours, randomise
+Maximum iterations: 1000 - track turns to resolve
 Each iteration outputs number of matching positions between the starting and target sequences
 When all positions match, script completes
 Each logged iteration shows log ID, number of matches, current color configuration, and which operation was applied.
